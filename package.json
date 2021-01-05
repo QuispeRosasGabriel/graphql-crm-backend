@@ -1,0 +1,23 @@
+{
+  "name": "crm-backend-graphql",
+  "version": "1.0.0",
+  "description": "Graphql-backend-crm",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "keywords": [
+    "graphql",
+    "node",
+    "avanzado"
+  ],
+  "author": "Gabriel Quispe",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.19.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
