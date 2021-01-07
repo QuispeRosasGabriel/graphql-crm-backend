@@ -21,8 +21,11 @@ const cursos = [
 // Resolvers
 const resolvers = {
     Query: {
-        obtenerCursos: () => cursos[0],
-        obtenerTecnologia: () => cursos
+        obtenerCursos: (_, {input}, context, info) => {
+            const resultado = cursos.filter((curso) => curso.tecnologia === input.tecnologia);
+
+            return resultado;
+        },
     }
 }
 
