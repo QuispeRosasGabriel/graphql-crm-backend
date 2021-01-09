@@ -1,4 +1,3 @@
-
 const {gql} = require('apollo-server');
 
 const typeDefs = gql`
@@ -7,7 +6,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        nuevoUsuario(input: UsuarioInput): String
+        nuevoUsuario(input: UsuarioInput): Usuario
     }
 
     type Usuario {
