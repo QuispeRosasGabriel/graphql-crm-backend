@@ -15,7 +15,9 @@
   "author": "Gabriel Quispe",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.19.1"
+    "apollo-server": "^2.19.1",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.11.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
