@@ -1,5 +1,11 @@
 const Usuario = require('../models/Usuario');
 const bcryptjs = require('bcryptjs');
+require('dotenv').config({path: 'variables.env'}); 
+
+const crearToken = (usuario, secreta, expiracion) => {
+
+}
+
 // Resolvers
 const resolvers = {
     Query: {
@@ -32,11 +38,17 @@ const resolvers = {
             const existeUsuario = await Usuario.findOne({email});
             
             if(!existeUsuario) {
-                throw new Error('El usuario no existe')
+                throw new Error('El usuario no existe');
             }
 
-            
+            const passwordCorrecto = await bcryptjs.compare(password, existeUsuario.password);
+            if(!passwordCorrecto) {
+                throw new Error('El password es incorrecto');
+            }
 
+            return {
+                token: crearToken(existeUsuario, pr)
+            }
         }
     }
 }
