@@ -4,14 +4,17 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config({path: 'variables.env'}); 
 
 const crearToken = (usuario, secreta, expiresIn) => {
-    const {id, email, apellido} = usuario;
-    return jwt.sign({id}, secreta, {expiresIn});
+    const {id, email, nombre, apellido} = usuario;
+    return jwt.sign({id, email, nombre, apellido}, secreta, {expiresIn});
 }
 
 // Resolvers
 const resolvers = {
     Query: {
-        obtenerCurso: () => "Algo"
+        obtenerUsuario: async(_, {token}) => {
+            const usuarioId = await jwt.verify(token, process.env.SEED);
+            return usuarioId;
+        }
     },
     Mutation: {
         nuevoUsuario: async (_, {input}) => {
