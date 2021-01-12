@@ -1,9 +1,12 @@
 const Usuario = require('../models/Usuario');
 const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config({path: 'variables.env'}); 
 
-const crearToken = (usuario, secreta, expiracion) => {
-
+const crearToken = (usuario, secreta, expiresIn) => {
+    console.log(usuario, secreta, expiracion);
+    const {id, email, apellido} = usuario;
+    return jwt.sign({id}, secreta, {expiresIn});
 }
 
 // Resolvers
@@ -47,7 +50,7 @@ const resolvers = {
             }
 
             return {
-                token: crearToken(existeUsuario, pr)
+                token: crearToken(existeUsuario, process.env.SEED, '24h')
             }
         }
     }
