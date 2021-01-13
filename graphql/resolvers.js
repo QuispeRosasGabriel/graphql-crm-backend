@@ -2,6 +2,7 @@ const Usuario = require('../models/Usuario');
 const Producto = require('../models/Producto');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { db } = require('../models/Usuario');
 require('dotenv').config({path: 'variables.env'}); 
 
 const crearToken = (usuario, secreta, expiresIn) => {
@@ -54,6 +55,22 @@ const resolvers = {
 
             return {
                 token: crearToken(existeUsuario, process.env.SEED, '24h')
+            }
+        },
+        nuevoProducto: async(_, {input}) => {
+            const {nombre} = input;
+            const existeProducto = await Producto.findOne({nombre});
+
+            if(!!existeProducto) {
+                throw new Error('El producto ingresado, ya está registrado');
+            }
+
+            try {
+                const nuevoProducto = new Producto(input);
+                const resultado = await nuevoProducto.save();
+                return resultado;
+            } catch (error) {
+                console.log(error);
             }
         }
     }
