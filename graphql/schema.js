@@ -17,6 +17,7 @@ const typeDefs = gql`
         
         #Producto
         nuevoProducto(input: ProductoInput): Producto,
+        actualizarProducto(id: ID!, input: ProductoInput  ): Producto,
     }
 
     type Usuario {
