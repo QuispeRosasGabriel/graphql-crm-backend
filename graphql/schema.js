@@ -6,7 +6,8 @@ const typeDefs = gql`
         obtenerUsuario(token: String!): Usuario,
         
         #Productos
-        obtenerProductos: [Producto]
+        obtenerProductos: [Producto],
+        obtenerProducto(id: ID!): Producto,
     }
 
     type Mutation {
