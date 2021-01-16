@@ -110,13 +110,14 @@ const resolvers = {
             await Producto.findOneAndDelete({_id: id});
             return 'Producto eliminado';
         },
-        nuevoCliente: async(_, {input}) => {
+        nuevoCliente: async(_, {input}, ctx) => {
             const {email} = input;
             const cliente =  await Cliente.findOne({email});
             if(!!cliente) {
                 throw new Error('El cliente ya está registrado');
             }
             const nuevoCliente = new Cliente(input);
+            nuevoCliente.vendedor = ctx.usuario.id;
 
             try {
                 const resultado = await nuevoCliente.save();
