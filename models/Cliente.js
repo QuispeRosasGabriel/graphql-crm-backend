@@ -36,3 +36,5 @@ const ClientesSchema = mongoose.Schema({
         ref: 'Usuario'
     }
 });
+
+module.exports = mongoose.model('Cliente', ClientesSchema);
