@@ -166,6 +166,20 @@ const resolvers = {
 
             cliente = await Cliente.findOneAndUpdate({_id: id}, input, {new: true});
             return cliente;
+        },
+        eliminarCliente: async(_, {id}, ctx) => {
+            let cliente = await Cliente.findById(id);
+
+            if(!cliente) {
+                throw new Error('El cliente no existe');
+            }
+
+            if(cliente.vendedor.toString() !== ctx.usuario.id) {
+                throw new Error('No tienes las credenciales')
+            }
+
+            await Cliente.findOneAndDelete({_id: id});
+            return 'El cliente ha sido eliminado';
         }
     }
 }
